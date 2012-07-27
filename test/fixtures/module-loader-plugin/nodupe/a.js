@@ -1,4 +1,3 @@
-debugger;
 var x = require('./proxy!./x');
 x.modifiedByA = true;
 

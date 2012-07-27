@@ -341,3 +341,9 @@ assert.equal('b', nodupeA.b.name);
 assert.equal('x', nodupeA.b.x.name);
 assert.equal(true, nodupeA.b.x.modifiedByA);
 assert.equal(true, nodupeA.b.x.modifiedByB);
+
+// fromText, for transpiler plugins
+var refineA = require('../fixtures/module-loader-plugin/fromText/refine!' +
+                      '../fixtures/module-loader-plugin/fromText/a');
+assert('a', refineA.name);
+
