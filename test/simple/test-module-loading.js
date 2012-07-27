@@ -295,3 +295,13 @@ process.on('exit', function() {
 // #1440 Loading files with a byte order marker.
 assert.equal(42, require('../fixtures/utf8-bom.js'));
 assert.equal(42, require('../fixtures/utf8-bom.json'));
+
+// basic define
+var defineA = require('../fixtures/module-define/a');
+assert.equal('a', defineA.name);
+assert.equal('b', defineA.b.name);
+assert.equal('d', defineA.b.d.name);
+assert.equal(true, defineA.b.d.modifiedByB);
+assert.equal('c', defineA.b.c.name);
+assert.equal('d', defineA.b.c.d.name);
+assert.equal(true, defineA.b.c.d.modifiedByB);
