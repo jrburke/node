@@ -305,3 +305,14 @@ assert.equal(true, defineA.b.d.modifiedByB);
 assert.equal('c', defineA.b.c.name);
 assert.equal('d', defineA.b.c.d.name);
 assert.equal(true, defineA.b.c.d.modifiedByB);
+
+// circular define
+var twoArgs = require('../fixtures/module-define/circular/two').doSomething();
+var funcTwo = require('../fixtures/module-define/circular/funcTwo');
+var twoInst = new funcTwo('TWO');
+assert.equal('small', twoArgs.size);
+assert.equal('redtwo', twoArgs.color);
+assert.equal('TWO', twoInst.name);
+assert.equal('ONE-NESTED', twoInst.oneName());
+var funcThree = require('../fixtures/module-define/circular/funcThree')('THREE')
+assert.equal('THREE-THREE_SUFFIX', funcThree);
