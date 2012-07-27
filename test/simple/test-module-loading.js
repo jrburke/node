@@ -326,3 +326,18 @@ assert.equal('b', earth.getB().name);
 assert.equal('aPrime', primeEarth.getA().name);
 assert.equal('cPrime', primeEarth.getC().name);
 assert.equal('bPrime', primeEarth.getB().name);
+
+// name only loader plugin
+var nameOnly = require('../fixtures/module-loader-plugin/nameOnly!');
+assert.equal('nameOnly', nameOnly.name);
+
+// assure that plugin resources are cached correctly
+var nodupeA = require('../fixtures/module-loader-plugin/nodupe/a');
+assert.equal('a', nodupeA.name);
+assert.equal('x', nodupeA.x.name);
+assert.equal(true, nodupeA.x.modifiedByA);
+assert.equal(true, nodupeA.x.modifiedByB);
+assert.equal('b', nodupeA.b.name);
+assert.equal('x', nodupeA.b.x.name);
+assert.equal(true, nodupeA.b.x.modifiedByA);
+assert.equal(true, nodupeA.b.x.modifiedByB);
