@@ -372,3 +372,26 @@ var root = require(refinePluginId +
 assert.equal(root.foo, foo);
 assert.equal(root.sayHello(), root.hello);
 
+// callback require called on nextTick
+var cbRequireCount = 0;
+require(['path'], function (path) {
+  cbRequireCount += 1;
+  assert.equal(1, cbRequireCount);
+  assert.equal(true, !!path.join);
+});
+assert.equal(0, cbRequireCount);
+
+// callback require called on nextTick, with an error
+require(['doesnotexist'], function (bogus) {
+  // should not get here
+  assert.equal(true, false);
+}, function (err) {
+  assert(true, !!err);
+});
+
+// callback require triggered inside a module
+var callbackModule = require('../fixtures/module-define/callbackRequire');
+callbackModule.doCallback(function (e) {
+  assert.equal('e', e.name);
+});
+
