@@ -317,6 +317,14 @@ assert.equal('ONE-NESTED', twoInst.oneName());
 var funcThree = require('../fixtures/module-define/circular/funcThree')('THREE')
 assert.equal('THREE-THREE_SUFFIX', funcThree);
 
+// multiple define calls in a file
+var defineLib = require('../fixtures/module-define/combined/lib');
+assert.equal('lib', defineLib.name);
+assert.equal('b', defineLib.b.name);
+assert.equal('d', defineLib.d.name);
+assert.equal('c', defineLib.d.cName);
+assert.equal('e', defineLib.d.e.name);
+
 // loader plugin
 var earth = require('../fixtures/module-loader-plugin/index/earth');
 var primeEarth = require('../fixtures/module-loader-plugin/index/prime/earth');
