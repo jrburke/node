@@ -349,7 +349,6 @@ var refineA = require(refinePluginId +
 assert('a', refineA.name);
 
 // cycle in fromText
-debugger;
 var root = require(refinePluginId +
            '!../fixtures/module-loader-plugin/fromText/circular/root'),
     foo = require(refinePluginId +
