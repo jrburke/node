@@ -325,6 +325,14 @@ assert.equal('d', defineLib.d.name);
 assert.equal('c', defineLib.d.cName);
 assert.equal('e', defineLib.d.e.name);
 
+// multiple define calls in a file, mixed local and external dependencies
+var defineMixed = require('../fixtures/module-define/combined/mixed');
+assert.equal('mixed', defineMixed.name);
+assert.equal(1, defineMixed.counter);
+assert.equal('separate', defineMixed.separate.name);
+assert.equal('local', defineMixed.local.name);
+assert.equal(true, defineMixed.local.hasPathJoin);
+
 // loader plugin
 var earth = require('../fixtures/module-loader-plugin/index/earth');
 var primeEarth = require('../fixtures/module-loader-plugin/index/prime/earth');
