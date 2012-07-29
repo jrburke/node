@@ -343,7 +343,17 @@ assert.equal(true, nodupeA.b.x.modifiedByA);
 assert.equal(true, nodupeA.b.x.modifiedByB);
 
 // fromText, for transpiler plugins
-var refineA = require('../fixtures/module-loader-plugin/fromText/refine!' +
-                      '../fixtures/module-loader-plugin/fromText/a');
+var refinePluginId = '../fixtures/module-loader-plugin/fromText/refine';
+var refineA = require(refinePluginId +
+              '!../fixtures/module-loader-plugin/fromText/a');
 assert('a', refineA.name);
+
+// cycle in fromText
+debugger;
+var root = require(refinePluginId +
+           '!../fixtures/module-loader-plugin/fromText/circular/root'),
+    foo = require(refinePluginId +
+          '!../fixtures/module-loader-plugin/fromText/circular/folder/foo');
+assert.equal(root.foo, foo);
+assert.equal(root.sayHello(), root.hello);
 
